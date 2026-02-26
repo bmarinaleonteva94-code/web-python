@@ -1,0 +1,9 @@
+distance = float(input("Введите расстояние в метрах: "))
+cm = distance * 100
+dm = distance * 10
+mm = distance * 1000
+mili = distance * 0.000621
+print(f"{distance}м = {cm}см")
+print(f"{distance}м = {dm}дм")
+print(f"{distance}м = {mm}мм")
+print(f"{distance}м = {mili}миль")

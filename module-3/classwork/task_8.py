@@ -1,0 +1,5 @@
+str = input("Введите любое предложение: ")
+search_word = input("Введите слово, которое нужно заменить: ")
+word = input("Введите слово, на которое нужно заменить: ")
+result = str.replace(search_word, word)
+print(result)
