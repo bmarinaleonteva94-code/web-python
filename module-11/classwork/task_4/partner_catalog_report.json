@@ -1,0 +1,136 @@
+{
+  "report_name": "partner_catalog_sync",
+  "products_count": 8,
+  "partner_feed": [
+    {
+      "sku": "MUG-09",
+      "title": "Thermo Mug",
+      "category": "lifestyle",
+      "supplier": "DailyCo",
+      "final_price": 990.0,
+      "stock": 18,
+      "tags": [
+        "kitchen",
+        "gift"
+      ]
+    },
+    {
+      "sku": "WEB-12",
+      "title": "Webcam FullHD",
+      "category": "electronics",
+      "supplier": "VisionTech",
+      "final_price": 2970.0000000000005,
+      "stock": 3,
+      "tags": [
+        "streaming",
+        "peripherals"
+      ]
+    },
+    {
+      "sku": "MS-210",
+      "title": "Wireless Mouse",
+      "category": "electronics",
+      "supplier": "KeyPro",
+      "final_price": 3040.0,
+      "stock": 2,
+      "tags": [
+        "wireless",
+        "peripherals"
+      ]
+    },
+    {
+      "sku": "KB-001",
+      "title": "Mechanical Keyboard",
+      "category": "electronics",
+      "supplier": "KeyPro",
+      "final_price": 8010.0,
+      "stock": 12,
+      "tags": [
+        "gaming",
+        "peripherals"
+      ]
+    },
+    {
+      "sku": "CHR-77",
+      "title": "Office Chair",
+      "category": "furniture",
+      "supplier": "HomeSpace",
+      "final_price": 11992.5,
+      "stock": 5,
+      "tags": [
+        "office",
+        "comfort"
+      ]
+    },
+    {
+      "sku": "DSK-15",
+      "title": "Standing Desk",
+      "category": "furniture",
+      "supplier": "HomeSpace",
+      "final_price": 25794.0,
+      "stock": 1,
+      "tags": [
+        "office",
+        "premium"
+      ]
+    },
+    {
+      "sku": "MON-32",
+      "title": "4K Monitor",
+      "category": "electronics",
+      "supplier": "VisionTech",
+      "final_price": 29031.2,
+      "stock": 4,
+      "tags": [
+        "display",
+        "premium"
+      ]
+    }
+  ],
+  "supplier_summary": {
+    "KeyPro": {
+      "products_count": 2,
+      "active_products_count": 2,
+      "total_stock": 14,
+      "inventory_value": 102200.0
+    },
+    "HomeSpace": {
+      "products_count": 2,
+      "active_products_count": 2,
+      "total_stock": 6,
+      "inventory_value": 85756.5
+    },
+    "DailyCo": {
+      "products_count": 2,
+      "active_products_count": 1,
+      "total_stock": 18,
+      "inventory_value": 17820.0
+    },
+    "VisionTech": {
+      "products_count": 2,
+      "active_products_count": 2,
+      "total_stock": 7,
+      "inventory_value": 125034.8
+    }
+  },
+  "category_summary": {
+    "electronics": {
+      "products_count": 4,
+      "active_products_count": 4,
+      "min_final_price": 2970.0,
+      "max_final_price": 2970.0
+    },
+    "furniture": {
+      "products_count": 2,
+      "active_products_count": 2,
+      "min_final_price": 11992.5,
+      "max_final_price": 11992.5
+    },
+    "lifestyle": {
+      "products_count": 2,
+      "active_products_count": 1,
+      "min_final_price": 990.0,
+      "max_final_price": 990.0
+    }
+  }
+}
