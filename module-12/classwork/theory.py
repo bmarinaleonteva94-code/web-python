@@ -50,7 +50,6 @@
 #     def create_button(self):
 #         return LightButton()
     
-# class LightThemeFactory:
 #     def create_input(self):
 #         return LightInput()
         
@@ -58,7 +57,6 @@
 #     def create_button(self):
 #         return DarkButton()
     
-# class DarkThemeFactory:
 #     def create_input(self):
 #         return DarkInput()
     
@@ -68,6 +66,7 @@
 #     print(button.render(), field.render())
 
 # build_form(LightThemeFactory())
+# build_form(DarkThemeFactory())
 
 # #   Builder
 # class LaptopBuilder:
@@ -79,23 +78,23 @@
 #             "gru": "intergrated"
 #         }
 
-# def for_study(self):
-#     self.laptop["ram"] = 16
-#     self.laptop["ssd"] = 512
-#     return self
+#     def for_study(self):
+#         self.laptop["ram"] = 16
+#         self.laptop["ssd"] = 512
+#         return self
 
-# def for_gaming(self):
-#     self.laptop["ram"] = 32
-#     self.laptop["ssd"] = 1024
-#     self.laptop["gru"] = "RTX 4070"
-#     return self
+#     def for_gaming(self):
+#         self.laptop["ram"] = 32
+#         self.laptop["ssd"] = 1024
+#         self.laptop["gru"] = "RTX 4070"
+#         return self
 
-# def with_cpu(self, cpu):
-#     self.laptop["cpu"] = cpu
-#     return self
+#     def with_cpu(self, cpu):
+#         self.laptop["cpu"] = cpu
+#         return self
 
-# def build(self):
-#     return self.laptop.copy()
+#     def build(self):
+#         return self.laptop.copy()
 
 # print(LaptopBuilder().for_study().with_cpu("Intel I7").build())
 
@@ -113,8 +112,8 @@
 # print(template_order, fast_order)
 
 
-
 # #  Структурные паттерны
+
 # #   Adapter
 # class OldSmsService:
 #     def send_sms(self, phone, text):
@@ -405,54 +404,107 @@
 # order.set_status("delivery")
 
 
-#  State
-class DraftState:
-    def publish(self, document):
-        document.state = ReviewState()
-        return "Черновик отправлен на проверку"
+# #  State
+# class DraftState:
+#     def publish(self, document):
+#         document.state = ReviewState()
+#         return "Черновик отправлен на проверку"
     
-class ReviewState:
-    def publish(self, document):
-        document.state = PublishedState()
-        return "Документ опубликован"
+# class ReviewState:
+#     def publish(self, document):
+#         document.state = PublishedState()
+#         return "Документ опубликован"
     
-class PublishedState:
-    def publish(self, document):
-        return " Уже опубликовано"
+# class PublishedState:
+#     def publish(self, document):
+#         return " Уже опубликовано"
     
-class Document:
-    def __init__(self):
-        self.state = DraftState()
+# class Document:
+#     def __init__(self):
+#         self.state = DraftState()
 
-    def publish(self):
-        return self.state.publish(self)
+#     def publish(self):
+#         return self.state.publish(self)
     
-doc = Document()
-doc.publish()
-doc.publish()
-doc.publish()
+# doc = Document()
+# doc.publish()
+# doc.publish()
+# doc.publish()
 
 
-# Stategy
-class StandartDelivery:
-    def calculate(self, weight):
-        return 200 + weight * 10
+# # Stategy
+# class StandartDelivery:
+#     def calculate(self, weight):
+#         return 200 + weight * 10
     
-class ExpressDelivery:
-    def calculate(self, weight):
-        return 500 + weight * 20
+# class ExpressDelivery:
+#     def calculate(self, weight):
+#         return 500 + weight * 20
     
-class PickupDelivery:
-    def calculate(self, weight):
-        return 0
+# class PickupDelivery:
+#     def calculate(self, weight):
+#         return 0
     
-class DeliveryCalc:
-    def __init__(self, stategy):
-        self.stategy = stategy
+# class DeliveryCalc:
+#     def __init__(self, stategy):
+#         self.stategy = stategy
 
-    def get_price(self, weight):
-        return self.stategy.calculate(weight)
+#     def get_price(self, weight):
+#         return self.stategy.calculate(weight)
     
-print(DeliveryCalc(PickupDelivery()).get_price(10))
+# print(DeliveryCalc(PickupDelivery()).get_price(10))
 
+
+#   Template Method
+class ReportTemplate:
+    def build(self):
+        data = self.fetch_data()
+        return self.format_data(data)
+
+    def fetch_data(self):
+        raise NotImplementedError 
+
+    def format_data(self, data):
+        raise NotImplementedError
     
+class SalesReport(ReportTemplate):
+    def fetch_data(self):
+        return [100,200,300]
+    
+    def format_data(self, data):
+        return f"Сумма продаж: {sum(data)}"
+    
+print(SalesReport().build())
+
+
+
+#  Visitor
+
+class Book:
+    def __init__(self, title, price):
+        self.title = title
+        self.price = price
+
+    def accept(self, visitor):
+        return visitor.visit_book(self)
+    
+class Course:
+    def __init__(self, title, price):
+        self.title = title
+        self.price = price
+
+    def accept(self, visitor):
+        return visitor.visit_course(self)
+    
+class DiscountVisitor:
+    def visit_book(self, book):
+        return f"{book.title}: {book.price * 0.9}"
+    
+    def visit_course(self, course):
+        return f"{course.title}: {course.price * 0.2}"
+    
+visitor = DiscountVisitor()
+items = [Book("book", 1000), Course("course", 5000)]
+
+for item in items:
+    print(item.accept(visitor))
