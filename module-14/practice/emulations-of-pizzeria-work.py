@@ -123,10 +123,10 @@ def get_topping() -> list[str]:
         "ketchup"
     ]
 
-def create_custom_recipe(inventory: Inventory) -> Recipe:
+def create_custom_recipe(inventory) -> Recipe:
     builder = PizzaBuilder()
     print("Создание своей пиццы")
-
+ 
     for key in get_topping():
         ingredient = inventory.ingredients[key]
         choice = input(f"Хотите добавить {ingredient.name}?")
