@@ -462,3 +462,235 @@ ALTER TABLE projects
 ALTER COLUMN is_active SET DEFAULT TRUE;
 ```
 
+## 9. Типы данных
+
+### `INT/INTEGER`
+для хранения целых чисел
+```sql
+CREATE TABLE employees(
+    id INT,
+    name TEXT,
+    age INT
+)
+```
+
+### `SMALLINT`
+для хранения целых чисел от -32000 до 32000
+```sql
+CREATE TABLE products(
+    id INT,
+    name TEXT,
+    rating SMALLINT
+)
+```
+
+### `BIGINT`
+для хранения больших целых чисел 
+```sql
+CREATE TABLE videos(
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title TEXT NOT NULL,
+    views BIGINT DEFAULT 0
+)
+```
+
+### `SERIAL`
+создает автоматически увеличивающийся числовой id, устарело
+```sql
+CREATE TABLE departments(
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL
+)
+```
+
+### `GENERATED`
+ГЕНЕРИРУЕТ ЗНАЧЕНИЕ СРЕДСТВАМИ БАЗЫ ДАННЫХ
+```sql
+CREATE TABLE departments(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL
+)
+```
+
+### `ALWAYS`
+ВСЕГДА АВТОМАТИЧЕСКИ ГЕНЕРИРУЕТ ЗНАЧЕНИЕ
+```sql
+CREATE TABLE departments(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL
+)
+```
+
+### `TEXT`
+ХРАНИТ ТЕКСТ БЕЗ ОГРАНИЧЕНИЯ ДЛИНЫ
+```sql
+CREATE TABLE employees(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    bio TEXT
+)
+```
+
+### `VARCHAR`
+ХРАНИТ ТЕКСТ С ОГРАНИЧЕННОЙ ДЛИНОЙ
+```sql
+CREATE TABLE users(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    email VARCHAR(255),
+    USERNAME VARCHAR(50)
+)
+```
+
+### `CHAR`
+ХРАНИТ СТРОКИ С ФИКСИРОВАННОЙ ДЛИНОЙ
+```sql
+CREATE TABLE countries(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    code CHAR(2),
+    name TEXT NOT NULL
+)
+```
+
+### `NUMERIC`
+ТОЧНОЕ ЧИСЛО, ЗНАЧЕНИЕ ДО 10 СИМВОЛОВ
+```sql
+CREATE TABLE employees(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    salary NUMERIC(10,2)
+)
+```
+
+### `DECIMAL`
+ПОХОЖ НА NUMERIC, ЧАЩЕ ДЛЯ ДРОБНЫХ ЧИСЕЛ
+```sql
+CREATE TABLE products(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    price DECIMAL(10,2)
+)
+```
+
+### `BOOLEAN`
+ХРАНИТ TRUE OR FALSE
+```sql
+CREATE TABLE users(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE
+)
+```
+
+### `DATE`
+ХРАНИТ ДАТУ БЕЗ ВРЕМЕНИ
+```sql
+CREATE TABLE employees(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    assigned_at DATE
+)
+```
+
+### `TIME`
+ХРАНИТ ОТМЕТКУ ВРЕМЕНИ
+```sql
+CREATE TABLE lessons(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title TEXT NOT NULL,
+    start_time TIME,
+    end_time TIME
+)
+```
+
+### `TIMESTAMP`
+ХРАНИТ ОТМЕТКУ ВРЕМЕНИ И ДАТУ '2026-05-20 18:35:00'
+```sql
+CREATE TABLE lessons(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title TEXT NOT NULL,
+    start_time TIME,
+    end_time TIME
+)
+```
+
+### `ENUM`
+ОГРАНИЧИВАЕТ ЗНАЧЕНИЕ ЗАДАННЫМ НАБОРОМ
+```sql
+CREATE TYPE order_status AS ENUM ('new', 'paid', 'shipped', 'cancelled')
+
+CREATE TABLE orders(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    status_order order_status DEFAULT 'new'
+)
+```
+
+### `NULL`
+ОТСУТСТВИЕ ЗНАЧЕНИЯ
+```sql
+CREATE TABLE users(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    middle_name TEXT
+)
+```
+
+
+## 10. Условные выражения
+
+### `CASE`
+УСЛОВНАЯ ЛОГИКА ВНУТРИ SQL
+```sql
+SELECT name,
+    salary,
+    CASE 
+        WHEN salary >= 15000 THEN 'high'
+        WHEN salary >= 80000 THEN 'medium'
+        ELSE 'low'
+    END AS salary_level
+FROM employees;
+```
+
+### `WHEN`
+УСЛОВИЕ ВНУТРИ CASE
+```sql
+    CASE 
+        WHEN salary >= 15000 THEN 'high'
+        WHEN salary >= 80000 THEN 'medium'
+        ELSE 'low'
+    END AS salary_level
+```
+
+### `THEN`
+УКАЗЫВАЕТ РЕЗУЛЬТАТ, ЕСЛИ УСЛОВИЕ ИСТИННО
+```sql
+SELECT name,
+    salary,
+    CASE 
+        WHEN salary >= 15000 THEN 'high'
+        WHEN salary >= 80000 THEN 'medium'
+        ELSE 'low'
+    END AS salary_level
+FROM employees;
+```
+
+### `ELSE`
+ЗАДАЕТ РЕЗУЛЬТАТ, ЕСЛИ ВСЕ УСЛОВИЯ НЕ ПОДОШЛИ
+```sql
+SELECT name,
+    salary,
+    CASE 
+        WHEN salary >= 15000 THEN 'high'
+        WHEN salary >= 80000 THEN 'medium'
+        ELSE 'low'
+    END AS salary_level
+FROM employees;
+```
+
+### `COALESCE`
+ВОЗВРАЩАЕТ ПЕРВОЕ ЗНАЧЕНИЕ, КОТОРОЕ НЕ ЯВЛЯЕТСЯ NULL
+```sql
+SELECT 
+    name,
+    COALESCE(salary, 0) as salary
+FROM employees;
+```
