@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-05-21T12:58:37.030609",
+  "hotdogs": [
+    {
+      "recipe_name": "Классический",
+      "quantity": 1,
+      "toppings": [
+        "Горчица",
+        "Кетчуп",
+        "Майонез"
+      ],
+      "price": 4.5
+    }
+  ],
+  "total_amount": 4.5,
+  "payment_method": "Наличные"
+}
