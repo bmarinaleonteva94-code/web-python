@@ -213,4 +213,4 @@ select
 from employees e
 join departments d on d.id = e.department_id 
 join projects p on p.employee_id = e.id 
-where 90000 < e.salary < 170000 and  
+where e.salary between 90000 and 170000
