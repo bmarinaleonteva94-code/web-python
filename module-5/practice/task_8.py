@@ -54,14 +54,11 @@ main()
 
 
 def display_menu():
-    print("\n" + "="*40)
     print("МЕНЮ БИБЛИОТЕКИ")
-    print("="*40)
     print("1. Отсортировать по названию книг")
     print("2. Отсортировать по годам выпуска")
     print("3. Вывести список книг с названиями и годами выпуска")
     print("4. Выход")
-    print("-"*40)
 
 def sort_by_titles(titles, years):
     combined = sorted(zip(titles, years), key=lambda x: x[0].lower())

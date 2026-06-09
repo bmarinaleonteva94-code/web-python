@@ -206,11 +206,11 @@ ALTER TABLE groups ADD COLUMN DepartmentId integer;
 
 UPDATE groups
 SET DepartmentId = CASE
-    WHEN name = 'A‑101' THEN 1 
-    WHEN name = 'B‑200' THEN 5
-    WHEN name = 'C‑300' THEN 4  
+    WHEN name = 'A-101' THEN 1 
+    WHEN name = 'B-200' THEN 5
+    WHEN name = 'C-300' THEN 4  
     WHEN name = 'A-103' THEN 1 
-    WHEN name = 'B‑204' THEN 5 
+    WHEN name = 'B-204' THEN 5 
     WHEN name = 'C-309' THEN 4 
     WHEN name = 'A-105' THEN 1 
 END;
@@ -326,37 +326,37 @@ FROM lectures l
 JOIN GroupsLectures gl ON l.id = gl.LectureId
 JOIN groups g ON gl.GroupId = g.id
 JOIN teachers t ON l.TeacherId = t.id
-WHERE LOWER(g.name) = 'а-101'
+WHERE LOWER(g.name) = 'A-101'
 ORDER BY t.surname , t.name;
 
 SELECT
     t.surname AS "Фамилия преподавателя",
     f.name AS "Название факультета"
 FROM teachers t
-JOIN departments d ON t.department_id = d.id
-JOIN faculties f ON d.faculty_id = f.id
+JOIN departments d ON t.DepartmentId = d.id
+JOIN faculties f ON d.FacultyId = f.id
 ORDER BY f.name, t.surname;
 
 SELECT DISTINCT
     d.name AS "Название кафедры",
     g.name AS "Название группы"
 FROM groups g
-JOIN faculties f ON g.faculty_id = f.id
-JOIN departments d ON f.id = d.faculty_id
+JOIN faculties f ON g.FacultyId = f.id
+JOIN departments d ON f.id = d.FacultyId
 ORDER BY d.name, g.name;
 
 SELECT DISTINCT
     s.name AS "Название дисциплины"
 FROM subjects s
-JOIN lectures l ON s.id = l.subject_id
-JOIN teachers t ON l.teacher_id = t.id
+JOIN lectures l ON s.id = l.SubjectId
+JOIN teachers t ON l.TeacherId = t.id
 WHERE t.name = 'Петр' AND t.surname = 'Петров'
 ORDER BY s.name;
 
 SELECT DISTINCT
     d.name AS "Название кафедры"
 FROM departments d
-JOIN teachers t ON d.id = t.department_id
+JOIN teachers t ON d.id = t.DepartmentId
 JOIN lectures l ON t.id = l.TeacherId
 JOIN subjects s ON l.SubjectId = s.id
 WHERE s.name = 'Математика'
@@ -365,7 +365,7 @@ ORDER BY d.name;
 SELECT
     g.name AS "Название группы"
 FROM groups g
-JOIN faculties f ON g.faculty_id = f.id
+JOIN faculties f ON g.FacultyId = f.id
 WHERE f.name = 'Физико-математический факультет'
 ORDER BY g.name;
 
@@ -373,7 +373,7 @@ SELECT
     g.name AS "Название группы",
     f.name AS "Название факультета"
 FROM groups g
-JOIN faculties f ON g.faculty_id = f.id
+JOIN faculties f ON g.FacultyId = f.id
 WHERE g.year = 5
 ORDER BY f.name, g.name;
 
