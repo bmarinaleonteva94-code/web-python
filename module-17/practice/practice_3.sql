@@ -158,10 +158,10 @@ values
 	('Сергей', 'Сергеев');
 
 ALTER TABLE groups
-ADD COLUMN curator_id integer; 
+ADD COLUMN CuratorId integer; 
 
 UPDATE groups
-SET curator_id = CASE
+SET CuratorId = CASE
     WHEN name = 'A-101' THEN 1     
     WHEN name = 'B-200' THEN 2 
 	WHEN name = 'C-300' THEN 3 
@@ -171,13 +171,13 @@ SET curator_id = CASE
     WHEN name = 'A-105' THEN 3 
 END;
 
-SELECT * FROM groups WHERE curator_id IS NULL;
+SELECT * FROM groups WHERE CuratorId IS NULL;
 
-ALTER TABLE groups ALTER COLUMN curator_id SET NOT NULL;
+ALTER TABLE groups ALTER COLUMN CuratorId SET NOT NULL;
 
 ALTER TABLE groups
 ADD CONSTRAINT fk_groups_curator
-FOREIGN KEY (curator_id)
+FOREIGN KEY (CuratorId)
 REFERENCES curators(id)
 ON DELETE SET NULL;
 
@@ -326,7 +326,7 @@ FROM lectures l
 JOIN GroupsLectures gl ON l.id = gl.LectureId
 JOIN groups g ON gl.GroupId = g.id
 JOIN teachers t ON l.TeacherId = t.id
-WHERE LOWER(g.name) = 'A-101'
+WHERE g.name = 'A-101'
 ORDER BY t.surname , t.name;
 
 SELECT
